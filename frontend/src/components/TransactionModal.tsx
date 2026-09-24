@@ -23,8 +23,6 @@ interface Props {
   /** Current share price used to estimate shares / tokens in the review step. Defaults to "1.0". */
   sharePrice?: string;
   onClose: () => void;
-  /** Current share price in underlying token units — used in withdraw review */
-  sharePrice?: string;
   /** Unix timestamp (ms) when sharePrice was last fetched */
   sharePriceUpdatedAt?: number;
 }
