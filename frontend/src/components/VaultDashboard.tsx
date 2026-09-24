@@ -5,6 +5,11 @@ import WalletConnect from "./WalletConnect";
 import VaultActions from "./VaultActions";
 import { useOnboarding } from "@/components/OnboardingChecklist";
 import { FinancialValue } from "./FinancialValue";
+import {
+  StatCardGridSkeleton,
+  PortfolioPanelSkeleton,
+  TransactionTableSkeleton,
+} from "./Skeleton";
 
 interface VaultStats {
   tvl: string;
@@ -215,18 +220,7 @@ export default function VaultDashboard() {
 
       {/* Metric cards */}
       {loading ? (
-        <div
-          className="grid grid-cols-2 gap-4 sm:grid-cols-4"
-          aria-busy="true"
-          aria-label="Loading vault statistics"
-        >
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-24 rounded-xl border border-zinc-200 bg-zinc-100 animate-pulse dark:border-zinc-700 dark:bg-zinc-800"
-            />
-          ))}
-        </div>
+        <StatCardGridSkeleton />
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4" role="region" aria-label="Vault statistics">
           <StatCard
@@ -276,6 +270,9 @@ export default function VaultDashboard() {
       )}
 
       {/* Wallet + Actions row */}
+      {loading ? (
+        <PortfolioPanelSkeleton />
+      ) : (
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <section aria-labelledby="wallet-heading">
           <h2 id="wallet-heading" className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500">
@@ -291,6 +288,7 @@ export default function VaultDashboard() {
           <VaultActions />
         </section>
       </div>
+      )}
 
       {/* Recent transactions */}
       <section aria-labelledby="tx-heading">
@@ -307,7 +305,10 @@ export default function VaultDashboard() {
             ↻ Refresh
           </button>
         </div>
-        <div
+        {loading ? (
+          <TransactionTableSkeleton rows={3} />
+        ) : (
+          <div
           data-cy="tx-list"
           className="rounded-xl border border-zinc-200 bg-white px-4 dark:border-zinc-700 dark:bg-zinc-900"
           role="list"
@@ -323,6 +324,7 @@ export default function VaultDashboard() {
             ))
           )}
         </div>
+        )}
       </section>
     </main>
   );
