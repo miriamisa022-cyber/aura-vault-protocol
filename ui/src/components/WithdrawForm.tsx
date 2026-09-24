@@ -78,10 +78,14 @@ export function WithdrawForm({ onToast }: Props) {
               aria-describedby={fieldError ? `${id}-err` : `${id}-hint`}
               aria-invalid={!!fieldError}
               aria-required="true"
+              aria-valuetext={shares ? `${shares} vault shares` : "No shares entered"}
               placeholder="0.00"
               className="input"
               autoComplete="off"
             />
+            <div className="sr-only" aria-live="polite" aria-atomic="true">
+              {shares ? `Shares: ${shares} vault shares` : "Shares cleared"}
+            </div>
             <p id={`${id}-hint`} className="field-hint" aria-hidden={!!fieldError}>
               Enter the number of vault shares to redeem for underlying tokens.
             </p>

@@ -78,10 +78,14 @@ export function DepositForm({ onToast }: Props) {
               aria-describedby={fieldError ? `${id}-err` : `${id}-hint`}
               aria-invalid={!!fieldError}
               aria-required="true"
+              aria-valuetext={amount ? `${amount} tokens` : "No amount entered"}
               placeholder="0.00"
               className="input"
               autoComplete="off"
             />
+            <div className="sr-only" aria-live="polite" aria-atomic="true">
+              {amount ? `Amount: ${amount} tokens` : "Amount cleared"}
+            </div>
             <p id={`${id}-hint`} className="field-hint" aria-hidden={!!fieldError}>
               Enter the token amount to deposit. You will receive{" "}
               <TermTooltip term="Vault Shares" /> proportional to your contribution.
