@@ -19,7 +19,7 @@ export { default as VaultHealthScore } from "./VaultHealthScore";
 export { VaultComparison, type VaultInfo, type VaultComparisonProps } from "./VaultComparison";
 export { ThemeToggle } from "./ThemeToggle";
 export { LanguageSwitcher } from "./LanguageSwitcher";
-export { Skeleton } from "./Skeleton";
+export { Skeleton, StatCardSkeleton, StatCardGridSkeleton, PortfolioPanelSkeleton, TransactionRowSkeleton, TransactionTableSkeleton, SharePriceChartSkeleton, VaultCardSkeleton } from "./Skeleton";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
 export { KeyboardShortcutsHelp } from "./KeyboardShortcutsHelp";
 export {

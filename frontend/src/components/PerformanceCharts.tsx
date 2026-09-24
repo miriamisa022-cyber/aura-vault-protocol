@@ -21,6 +21,7 @@ import {
   type TimePeriod,
   type PerformanceData,
 } from "../lib/performanceCharts";
+import { SharePriceChartSkeleton } from "./Skeleton";
 
 ChartJS.register(
   CategoryScale,
@@ -164,11 +165,7 @@ export default function PerformanceCharts() {
   }
 
   if (!data) {
-    return (
-      <div className="rounded-xl border border-zinc-200 p-6 dark:border-zinc-700">
-        <div className="h-96 bg-zinc-100 dark:bg-zinc-800 rounded-lg animate-pulse" />
-      </div>
-    );
+    return <SharePriceChartSkeleton />;
   }
 
   // ── Build chart data ────────────────────────────────────────────────────────
@@ -537,9 +534,9 @@ export default function PerformanceCharts() {
 
       {/* Charts */}
       {activeTab === "balance" && (
-        <div data-cy="balance-chart" className="h-96 relative">
+        <div data-cy="balance-chart" className="h-96 relative" aria-busy={loading}>
           {loading ? (
-            <div className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 rounded-lg animate-pulse" />
+            <div className="absolute inset-0 skeleton rounded-lg" aria-hidden="true" />
           ) : (
             <Line
               ref={chartRef}
@@ -552,9 +549,9 @@ export default function PerformanceCharts() {
       )}
 
       {activeTab === "apy" && (
-        <div data-cy="apy-chart" className="h-96 relative">
+        <div data-cy="apy-chart" className="h-96 relative" aria-busy={loading}>
           {loading ? (
-            <div className="absolute inset-0 bg-zinc-100 dark:bg-zinc-800 rounded-lg animate-pulse" />
+            <div className="absolute inset-0 skeleton rounded-lg" aria-hidden="true" />
           ) : (
             <Line
               ref={chartRef}
